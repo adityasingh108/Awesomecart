@@ -19,7 +19,6 @@ from django.template.loader import render_to_string
 def payments(request):
     # get the data from the payapal in format of json 
     body = json.loads(request.body)
-    print(body)
     # SAVE THE TRANSACTION DATA IN THE DATBSAE
     order = Order.objects.get(user = request.user,is_ordered =False, order_number=body['orderID'])
     payment = Payment(
