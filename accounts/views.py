@@ -157,8 +157,11 @@ def activate(request ,uidb64,token):
 def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id = request.user.id,is_ordered=True)
     order_count = orders.count()
+    userprofile = UserProfle.objects.get(user_id=request.user.id)
+    print(userprofile)
     context = {
         'order_count':order_count,
+        'userprofile':userprofile,
     }
     return render(request,'accounts/dashboard.html',context) 
 
