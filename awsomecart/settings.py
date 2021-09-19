@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'admin_honeypot',
+    
 ]
 
 MIDDLEWARE = [
@@ -156,4 +157,3 @@ EMAIL_USE_TLS      =config('EMAIL_USE_TLS',cast=bool)
 
 
 
-ADMIN_HONEYPOT_EMAIL_ADMINS = True
