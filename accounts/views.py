@@ -40,6 +40,14 @@ def register(request):
             user = Account.objects.create_user(first_name=first_name,last_name=last_name,email=email,username=username,password=password)
             user.phone_number = phone_number
             user.save()
+            
+            
+             # Create a user profile
+            profile = UserProfle()
+            profile.user_id = user.id
+            profile.profile_picture = 'default/default-user.png'
+            profile.save()
+            
              
             # user Activation
             current_site = get_current_site(request)
@@ -124,7 +132,7 @@ def login(request):
             except:
                 return redirect('dashboard')
         else:
-            messages.error(request , "acoount not verified")
+            messages.error(request , "Invalid Credentials")
             return redirect('login')
         
     return render(request , 'accounts/login.html')
@@ -157,8 +165,8 @@ def activate(request ,uidb64,token):
 def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id = request.user.id,is_ordered=True)
     order_count = orders.count()
+    
     userprofile = UserProfle.objects.get(user_id=request.user.id)
-    print(userprofile)
     context = {
         'order_count':order_count,
         'userprofile':userprofile,
