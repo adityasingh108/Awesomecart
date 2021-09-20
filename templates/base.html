@@ -47,10 +47,13 @@
         });
 // jquery end
     </script>
+   
 
 </head>
 
-<body>
+<body onload="myFunction()">
+   <div id="loading"></div>
+
      {% include 'includes/navbar.html' %}
 
     {% block content %}
@@ -58,4 +61,17 @@
     {% endblock %}
 
     {% include 'includes/footer.html' %}
+         <script>
+        // $(document).ready(function(){
+                // 	$('div#loading').removeAttr('id');
+            // });
+            var preloader = document.getElementById("loading");
+            // window.addEventListener('load', function(){
+            // 	preloader.style.display = 'none';
+            // 	})
+    
+            function myFunction(){
+                preloader.style.display = 'none';
+            };
+    </script>
 </body>    
