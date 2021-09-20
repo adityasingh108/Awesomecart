@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . models import Product, Variation,ReviewRating,ProductGallery
+from django.utils.html import format_html
 
 import admin_thumbnails
 
@@ -19,8 +20,16 @@ class VariationAdmin(admin.ModelAdmin):
     list_display    = ('product','variation_category','variation_value','is_active')
     list_editable   = ('is_active', )  
     list_filter     =  ('product','variation_category','variation_value',)
+ 
+@admin_thumbnails.thumbnail('image')    
+class ProductGalleryAdmin(admin.ModelAdmin):
+    def thumbnail(self,object):
+        return format_html('<img src= "{}" width="10%" style="border-radius:50%;">' .format(object.image.url))
+    thumbnail.short_description = 'Product Image'
+    list_display= ('product','thumbnail',)
+    list_filter = ('product',)    
 
 admin.site.register(Product ,ProductAdmin)
 admin.site.register(Variation ,VariationAdmin)
 admin.site.register(ReviewRating)
-admin.site.register(ProductGallery)
+admin.site.register(ProductGallery,ProductGalleryAdmin)
