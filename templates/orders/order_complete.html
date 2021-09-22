@@ -9,11 +9,11 @@
     <center><i class="fas fa-check-circle" style="font-size: 72px;margin-bottom: 20px;color: #28A745;"></i></center>
     <h2 class="text-center">Payment Successful</h2>
 	<br>
-	<div class="text-center">
-		<a href="{% url 'store' %}" class="btn btn-success">Shop more</a>
-	</div>
 </div>
-
+<div class="container mt-3" style="text-align: center;">
+    <button class=" btn btn-success"  onclick="PrintPage()">Print Invoice <i class="fas fa-print"></i></button>
+    <button id='download' class=" btn btn-success">Download Invoice <i class="fa fa-download"></i></button>
+</div>
 <div class="container" style="margin: 0 auto;width: 50%;padding: 50px;background: #f1f1f1;margin-top: 50px;margin-bottom: 50px;" id="invoice_content">
     <div class="row invoice row-printable">
         <div class="col-md-12">
@@ -116,7 +116,36 @@
         <!-- col-lg-12 end here -->
     </div>
 </div>
-<div class="container"><button class=" btn btn-success mb-3" style="margin-left: 50%;" onclick="window.print()"><i class="fas fa-print"></i></button>
-</div>
+
+<script>
+   
+//  function to print the invoice 
+function PrintPage(){
+    var body  = document.getElementById('body').innerHTML;
+    var invoice_content =document.getElementById('invoice_content').innerHTML;
+    document.getElementById('body').innerHTML = invoice_content;
+    window.print()
+    document.getElementById('body').innerHTML = body
+}
+
+
+// Function to downloa the pdf 
+var filename  = "{{order.full_name}}"+" {{order.order_number}}"
+window.onload = function () {
+document.getElementById("download")
+    .addEventListener("click", () => {
+        const invoice = this.document.getElementById("invoice_content");
+        var opt = {
+            margin: 1,
+            filename: filename,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 1 },
+            jsPDF: { unit: 'in', format: 'a3', orientation: 'landscape' }
+        };
+        html2pdf().from(invoice).set(opt).save();
+    })
+ }
+
+</script>
 
 {% endblock  %}

@@ -37,6 +37,9 @@
     <!-- load paypal  -->
     <script src="https://www.paypal.com/sdk/js?client-id=AV-u7Xv430U0RiYINeVoDax0iLghv894foku1_GMWCoeQYDZt5f7iR8K9ZmH5ZqCcsu5eifSOEEKzYfL&currency=USD"></script>
 
+    <!-- load jsPDF  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
     <script type="text/javascript">
         /// some script
 
@@ -50,9 +53,9 @@
    
 
 </head>
-
-<body onload="myFunction()">
-   <div id="loading"></div>
+<!-- onload="myFunction()" -->
+<body  id='body'>
+   <!-- <div id="loading"></div> -->
 
      {% include 'includes/navbar.html' %}
 
@@ -74,4 +77,5 @@
                 preloader.style.display = 'none';
             };
     </script>
-</body>    
+</body>  
+</html>  

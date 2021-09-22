@@ -14,6 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('product_name','price','stock','category','modified_date','is_available')
     prepopulated_fields = {'slug':('product_name',)}
     inlines= [ProductGalleryInline]
+    list_filter= ('stock','category','is_available',)
     
     
 class VariationAdmin(admin.ModelAdmin):
