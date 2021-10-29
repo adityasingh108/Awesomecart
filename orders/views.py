@@ -9,8 +9,9 @@ import datetime
 from .models import Order, Payment, OrderProduct
 import json
 from store.models import Product
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, message
 from django.template.loader import render_to_string
+from django.contrib import messages
 
 
 
@@ -86,6 +87,12 @@ def payments(request):
     return JsonResponse(data)
 
 def place_order(request,total = 0,quantity = 0):
+    messages.warning(request,"Don't make real transaction this is dumy website ")
+    messages.info(request,"Don't make real transaction this is dumy website ")
+    messages.error(request, "Do not make real payment ")
+
+    
+    
     current_user = request.user
     cart_items = CartItem.objects.filter(user= current_user)
     cart_count = cart_items.count()
@@ -100,7 +107,7 @@ def place_order(request,total = 0,quantity = 0):
         
     tax = (2 *total)/100
     GrandTotal = total+tax    
-
+    
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():

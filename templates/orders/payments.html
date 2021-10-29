@@ -114,7 +114,17 @@
                         <div id="paypal-button-container">
 
                         </div>
-
+                           {% if messages %}
+                              <div  class="messages">
+                                  {% for message in messages %}
+                                  <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
+                                      
+                                      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error: {% endif %}
+                                      {{ message }}
+                                  </div>
+                              </div>
+                                   {% endfor %}
+                            {% endif %}
                     </div> <!-- card-body.// -->
                 </div> <!-- card.// -->
 

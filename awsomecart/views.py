@@ -12,4 +12,4 @@ def home(request):
         'reviews':reviews,
     }
 
-    return render(request, 'home.html',context)
+    return render(request, 'home1.html',context)

@@ -30,7 +30,9 @@ class ProductGalleryAdmin(admin.ModelAdmin):
     list_display= ('product','thumbnail',)
     list_filter = ('product',)    
 
+class AdminReviewRating(admin.ModelAdmin):
+    list_display = ['product','rating','subject','user',]
 admin.site.register(Product ,ProductAdmin)
 admin.site.register(Variation ,VariationAdmin)
-admin.site.register(ReviewRating)
+admin.site.register(ReviewRating,AdminReviewRating)
 admin.site.register(ProductGallery,ProductGalleryAdmin)
